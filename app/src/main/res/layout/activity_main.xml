@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/btnstudent"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:text="Student"
+        android:layout_gravity="center"
+        android:layout_marginTop="220dp"
+        android:textSize="28dp"
+        android:onClick="Students"/>
+
+
+    <Button
+        android:id="@+id/btnClasses"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:text="Classes"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:textSize="28dp"
+        android:onClick="Classes"/>
+
+
+    <Button
+        android:id="@+id/btnEnrollment"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:text="Enrollment"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:textSize="28dp"
+        android:onClick="Enrollments"/>
+
+
+</LinearLayout>

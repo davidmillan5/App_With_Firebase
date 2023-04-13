@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudentActivity"
+    android:orientation="vertical"
+    android:background="@color/lightBlue">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:orientation="vertical"
+    android:layout_marginTop="54dp">
+
+    <EditText
+        android:id="@+id/etId"
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="18dp"
+        android:hint="Enter Id"
+        android:gravity="center"
+        android:background="@color/gray"
+        />
+
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="18dp"
+        android:hint="Enter Your Name"
+        android:gravity="center"
+        android:background="@color/gray"/>
+
+    <EditText
+        android:id="@+id/etMajor"
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="18dp"
+        android:hint="Enter Your Major"
+        android:gravity="center"
+        android:background="@color/gray"
+        />
+
+    <EditText
+        android:id="@+id/etSemester"
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="18dp"
+        android:hint="Enter Your Semester"
+        android:gravity="center"
+        android:background="@color/gray"/>
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:layout_marginVertical="12dp">
+
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Active"
+        android:textSize="24dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginHorizontal="90dp"/>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="320dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"/>
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Search"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"/>
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"/>
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Clear"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Back"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</LinearLayout>
