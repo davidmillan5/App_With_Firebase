@@ -57,18 +57,22 @@ public class StudentActivity extends AppCompatActivity {
             jetId.requestFocus();
         }else{
             // Create e a new user with a first and last name
-            Map<String, Object> user = new HashMap<>();
-            user.put("first", "Ada");
-            user.put("last", "Lovelace");
-            user.put("born", 1815);
+            Map<String, Object> student = new HashMap<>();
+            student.put("Id", id);
+            student.put("FullName", fullName);
+            student.put("Major", major);
+            student.put("Semester", semester);
+            student.put("CheckBox", "Yes");
 
             // Add a new document with a generated ID
-            db.collection("users")
-                    .add(user)
+            db.collection("Students")
+                    .add(student)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            Toast.makeText(StudentActivity.this, "Created Document", Toast.LENGTH_SHORT).show();
+                            Clear_fields();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -82,5 +86,13 @@ public class StudentActivity extends AppCompatActivity {
 
     }
 
+    private void Clear_fields(){
+        jetId.setText("");
+        jetSemester.setText("");
+        jetMajor.setText("");
+        jetFullName.setText("");
+        jcCheckBox.setChecked(false);
+        jetId.requestFocus();
+    }
 
 }
