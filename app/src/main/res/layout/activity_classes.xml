@@ -139,7 +139,7 @@
 
             <Button
                 android:id="@+id/btnCancel"
-                android:onClick="Cancel"
+                android:onClick="Clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

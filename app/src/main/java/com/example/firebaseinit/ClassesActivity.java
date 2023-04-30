@@ -5,6 +5,8 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,10 +14,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,5 +108,57 @@ public class ClassesActivity extends AppCompatActivity {
     }
 
     //End Method
+
+    // Search Method
+
+    private void Search_id(){
+        classCode=jetClassCode.getText().toString();
+        if(classCode.isEmpty()){
+            Toast.makeText(this, "Id required to make a search", Toast.LENGTH_SHORT).show();
+            jetClassCode.requestFocus();
+        }else{
+            db.collection("Students")
+                    .whereEqualTo("classCode",classCode)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d(TAG, document.getId() + " => " + document.getData());
+                                    classCode_id = document.getId();
+                                    jetNameClass.setText(document.getString("NameClass"));
+                                    jetCreditClass.setText(document.getString("CreditClass"));
+                                    jetProfessorName.setText(document.getString("ProfessorName"));
+                                    if(document.getString("CheckBox").equals("Yes")){
+                                        jccheckBoxProfessor.setChecked(true);
+                                    }else{
+                                        jccheckBoxProfessor.setChecked(false);
+                                    }
+
+                                }
+                            } else {
+                                Log.w(TAG, "Error getting documents.", task.getException());
+                                Toast.makeText(ClassesActivity.this, "Code Founded", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+    //Public Search Method
+    public void Search(View view){
+        Search_id();
+    }
+
+
+    // End Method
+
+    public void Back(View view){
+        Intent intmain=new Intent(this,MainActivity.class);
+        startActivity(intmain);
+    }
+
+
 
 }
