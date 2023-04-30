@@ -1,9 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClassesActivity">
+    tools:context=".ClassesActivity"
+    android:orientation="vertical"
+    android:background="@color/lightBlue">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="80dp"
+     android:orientation="horizontal"
+     android:layout_marginTop="64dp">
+
+     <EditText
+         android:id="@+id/etclassCode"
+         android:layout_height="48dp"
+         android:layout_width="180dp"
+         android:inputType="number"
+         android:layout_marginTop="16dp"
+         android:layout_marginHorizontal="12dp"
+         android:hint="Enter Class Code"
+         android:textAlignment="center"
+         android:background="@color/gray"
+         />
+     <Button
+         android:id="@+id/btnSearch"
+         android:layout_height="48dp"
+         android:layout_width="180dp"
+         android:onClick="Search"
+         android:layout_weight="1"
+         android:text="Search"
+         android:layout_marginTop="16dp"
+         android:layout_marginHorizontal="12dp"
+         android:backgroundTint="@color/blueButton"/>
+
+ </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/etNameClass"
+            android:layout_height="48dp"
+            android:layout_width="180dp"
+            android:inputType="text"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="12dp"
+            android:hint="Enter Class Name"
+            android:textAlignment="center"
+            android:background="@color/gray"
+            />
+
+        <EditText
+            android:id="@+id/etCreditClass"
+            android:layout_height="48dp"
+            android:layout_width="180dp"
+            android:inputType="number"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="12dp"
+            android:hint="Enter Credits"
+            android:textAlignment="center"
+            android:background="@color/gray"
+            />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/etProfessorName"
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="12dp"
+            android:hint="Enter Professor Name"
+            android:textAlignment="center"
+            android:background="@color/gray"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_marginVertical="12dp">
+
+
+        <CheckBox
+            android:id="@+id/checkBoxProfessor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Active"
+            android:textSize="24dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginHorizontal="90dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add"
+                android:onClick="Add"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="12dp"
+                android:backgroundTint="@color/blueButton"/>
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:onClick="Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="12dp"
+                android:backgroundTint="@color/blueButton"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Back"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="12dp"
+                android:backgroundTint="@color/blueButton"
+                android:onClick="Back"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
