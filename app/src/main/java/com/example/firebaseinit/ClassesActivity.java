@@ -47,6 +47,7 @@ public class ClassesActivity extends AppCompatActivity {
         jetCreditClass = findViewById(R.id.etCreditClass);
         jetNameClass = findViewById(R.id.etNameClass);
         jetProfessorName = findViewById(R.id.etProfessorName);
+        jccheckBoxProfessor = findViewById(R.id.checkBoxProfessor);
         classCode_id = "";
 
     }
@@ -65,16 +66,16 @@ public class ClassesActivity extends AppCompatActivity {
             jetClassCode.requestFocus();
         }else{
             // Create e a new user with a first and last name
-            Map<String, Object> classunit = new HashMap<>();
-            classunit.put("ClassCode", classCode);
-            classunit.put("ClassName", nameClass);
-            classunit.put("Credits", creditClass);
-            classunit.put("ProfessorName", professorName);
-            classunit.put("checkBoxProfessor", "Yes");
+            Map<String, Object> subject = new HashMap<>();
+            subject.put("ClassCode", classCode);
+            subject.put("ClassName", nameClass);
+            subject.put("Credits", creditClass);
+            subject.put("ProfessorName", professorName);
+            subject.put("checkBoxProfessor", "Yes");
 
             // Add a new document with a generated ID
             db.collection("Classes")
-                    .add(classunit)
+                    .add(subject)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -92,6 +93,8 @@ public class ClassesActivity extends AppCompatActivity {
         }
     }
     //End Add Method
+
+    //Start Private methods Clear Fields
 
     private void Clear_fields(){
         jetClassCode.setText("");
@@ -114,11 +117,11 @@ public class ClassesActivity extends AppCompatActivity {
     private void Search_id(){
         classCode=jetClassCode.getText().toString();
         if(classCode.isEmpty()){
-            Toast.makeText(this, "Id required to make a search", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Class code required to make a search", Toast.LENGTH_SHORT).show();
             jetClassCode.requestFocus();
         }else{
-            db.collection("Students")
-                    .whereEqualTo("classCode",classCode)
+            db.collection("Classes")
+                    .whereEqualTo("ClassCode",classCode)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -127,10 +130,10 @@ public class ClassesActivity extends AppCompatActivity {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     Log.d(TAG, document.getId() + " => " + document.getData());
                                     classCode_id = document.getId();
-                                    jetNameClass.setText(document.getString("NameClass"));
-                                    jetCreditClass.setText(document.getString("CreditClass"));
+                                    jetNameClass.setText(document.getString("ClassName"));
+                                    jetCreditClass.setText(document.getString("Credits"));
                                     jetProfessorName.setText(document.getString("ProfessorName"));
-                                    if(document.getString("CheckBox").equals("Yes")){
+                                    if(document.getString("checkBoxProfessor").equals("Yes")){
                                         jccheckBoxProfessor.setChecked(true);
                                     }else{
                                         jccheckBoxProfessor.setChecked(false);
@@ -153,6 +156,58 @@ public class ClassesActivity extends AppCompatActivity {
 
 
     // End Method
+
+
+    //Start Method Edit
+
+    public void Edit(View view) {
+        if (!classCode_id.equals("")) {
+            classCode=jetClassCode.getText().toString();
+            nameClass=jetNameClass.getText().toString();
+            creditClass=jetCreditClass.getText().toString();
+            professorName=jetProfessorName.getText().toString();
+
+            if (classCode.isEmpty() || nameClass.isEmpty() || creditClass.isEmpty() || professorName.isEmpty()) {
+                Toast.makeText(this, "All of the fields are required", Toast.LENGTH_SHORT).show();
+                jetClassCode.requestFocus();
+            } else {
+                // Create e a new user with a first and last name
+                Map<String, Object> subject = new HashMap<>();
+                subject.put("ClassCode", classCode);
+                subject.put("ClassName", nameClass);
+                subject.put("Credits", creditClass);
+                subject.put("ProfessorName", professorName);
+                if(jccheckBoxProfessor.isChecked()){
+                    subject.put("checkBoxProfessor", "Yes");
+                }else{
+                    subject.put("checkBoxProfessor","No");
+                }
+
+                db.collection("Classes").document(classCode)
+                        .set(subject)
+
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(ClassesActivity.this, "The Class was correctly updated.....", Toast.LENGTH_SHORT).show();
+                                Clear_fields();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ClassesActivity.this, "The Class could not be updated....", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }else{
+            Toast.makeText(this, "Random comment", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    // End Method Edit
+
 
     public void Back(View view){
         Intent intmain=new Intent(this,MainActivity.class);
