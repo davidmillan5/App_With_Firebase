@@ -176,7 +176,7 @@ public class StudentActivity extends AppCompatActivity {
                     student.put("CheckBox","No");
                 }
 
-                db.collection("Students").document(id)
+                db.collection("Students").document(id_document)
                         .set(student)
 
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

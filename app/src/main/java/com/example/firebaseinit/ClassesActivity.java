@@ -25,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ClassesActivity extends AppCompatActivity {
 
@@ -116,7 +117,7 @@ public class ClassesActivity extends AppCompatActivity {
 
     private void Search_id(){
         classCode=jetClassCode.getText().toString();
-        if(classCode.isEmpty()){
+        if(classCode.isEmpty()) {
             Toast.makeText(this, "Class code required to make a search", Toast.LENGTH_SHORT).show();
             jetClassCode.requestFocus();
         }else{
@@ -133,12 +134,8 @@ public class ClassesActivity extends AppCompatActivity {
                                     jetNameClass.setText(document.getString("ClassName"));
                                     jetCreditClass.setText(document.getString("Credits"));
                                     jetProfessorName.setText(document.getString("ProfessorName"));
-                                    if(document.getString("checkBoxProfessor").equals("Yes")){
-                                        jccheckBoxProfessor.setChecked(true);
-                                    }else{
-                                        jccheckBoxProfessor.setChecked(false);
-                                    }
-
+                                    jccheckBoxProfessor.setChecked(Objects.equals(document.getString("checkBoxProfessor"), "Yes"));
+                                    Toast.makeText(ClassesActivity.this, "Code Founded", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Log.w(TAG, "Error getting documents.", task.getException());
@@ -161,29 +158,27 @@ public class ClassesActivity extends AppCompatActivity {
     //Start Method Edit
 
     public void Edit(View view) {
-        if (!classCode_id.equals("")) {
-            classCode=jetClassCode.getText().toString();
-            nameClass=jetNameClass.getText().toString();
-            creditClass=jetCreditClass.getText().toString();
-            professorName=jetProfessorName.getText().toString();
+        classCode=jetClassCode.getText().toString();
+        nameClass=jetNameClass.getText().toString();
+        creditClass=jetCreditClass.getText().toString();
+        professorName=jetProfessorName.getText().toString();
 
-            if (classCode.isEmpty() || nameClass.isEmpty() || creditClass.isEmpty() || professorName.isEmpty()) {
-                Toast.makeText(this, "All of the fields are required", Toast.LENGTH_SHORT).show();
-                jetClassCode.requestFocus();
-            } else {
-                // Create e a new user with a first and last name
-                Map<String, Object> subject = new HashMap<>();
-                subject.put("ClassCode", classCode);
-                subject.put("ClassName", nameClass);
-                subject.put("Credits", creditClass);
-                subject.put("ProfessorName", professorName);
-                if(jccheckBoxProfessor.isChecked()){
-                    subject.put("checkBoxProfessor", "Yes");
-                }else{
-                    subject.put("checkBoxProfessor","No");
-                }
+        if(classCode.isEmpty() || nameClass.isEmpty() || creditClass.isEmpty() || professorName.isEmpty()){
+            Toast.makeText(this, "All of the fields are required", Toast.LENGTH_SHORT).show();
+            jetClassCode.requestFocus();
+        }else{
+            // Create e a new user with a first and last name
+            Map<String, Object> subject = new HashMap<>();
+            subject.put("ClassCode", classCode);
+            subject.put("ClassName", nameClass);
+            subject.put("Credits", creditClass);
+            subject.put("ProfessorName", professorName);
+            subject.put("checkBoxProfessor", "Yes");
 
-                db.collection("Classes").document(classCode)
+            // Add a new document with a generated ID
+
+            if (!classCode_id.equals("")) {
+                db.collection("Classes").document(classCode_id)
                         .set(subject)
 
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -199,9 +194,24 @@ public class ClassesActivity extends AppCompatActivity {
                                 Toast.makeText(ClassesActivity.this, "The Class could not be updated....", Toast.LENGTH_SHORT).show();
                             }
                         });
+            }else{
+                db.collection("Classes")
+                        .add(subject)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                Toast.makeText(ClassesActivity.this, "Created Document", Toast.LENGTH_SHORT).show();
+                                Clear_fields();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
             }
-        }else{
-            Toast.makeText(this, "Random comment", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -214,6 +224,48 @@ public class ClassesActivity extends AppCompatActivity {
         startActivity(intmain);
     }
 
+// Anulate Method
 
+    public void Anulate(View view){
+        if(!classCode_id.equals("")){
+            classCode = jetClassCode.getText().toString();
+            nameClass = jetNameClass.getText().toString();
+            creditClass = jetCreditClass.getText().toString();
+            professorName = jetProfessorName.getText().toString();
+
+            if (classCode.isEmpty() || nameClass.isEmpty() || creditClass.isEmpty() || professorName.isEmpty()) {
+                Toast.makeText(this, "All of the fields are required", Toast.LENGTH_SHORT).show();
+                jetClassCode.requestFocus();
+            } else {
+                // Create e a new user with a first and last name
+                Map<String, Object> subject = new HashMap<>();
+                subject.put("ClassCode", classCode);
+                subject.put("ClassName", nameClass);
+                subject.put("Credits", creditClass);
+                subject.put("ProfessorName", professorName);
+                subject.put("checkBoxProfessor", "No");
+
+                db.collection("Classes").document(classCode)
+                        .set(subject)
+
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(ClassesActivity.this, "Student correctly updated.....", Toast.LENGTH_SHORT).show();
+                                Clear_fields();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ClassesActivity.this, "Student could not be updated....", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }else{
+            Toast.makeText(this, "First you got to search...", Toast.LENGTH_SHORT).show();
+            jetClassCode.requestFocus();
+        }
+    }
 
 }
