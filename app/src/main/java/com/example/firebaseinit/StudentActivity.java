@@ -135,6 +135,20 @@ public class StudentActivity extends AppCompatActivity {
     }
 
 
+    // General Consult Method Begins
+
+    public void General_Consult(View view){
+        Intent generalIntent = new Intent(this, StudentListingActivity.class);
+        startActivity(generalIntent);
+    }
+
+
+
+
+
+
+    // General Consult Method Ends
+
 
     // Clear fields method
     private void Clear_fields(){
@@ -271,5 +285,6 @@ public class StudentActivity extends AppCompatActivity {
             jetId.requestFocus();
         }
     }
+
 
 }

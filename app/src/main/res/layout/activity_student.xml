@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="2dp">
 
 
         <Button
@@ -180,14 +180,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp">
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:layout_marginTop="2dp">
 
 
         <Button
+            android:id="@+id/btnconsult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Consult"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/blueButton"
+            android:onClick="General_Consult"/>
+
+        <Button
             android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Back"
