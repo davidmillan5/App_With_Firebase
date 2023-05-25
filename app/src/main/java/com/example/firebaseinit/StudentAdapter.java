@@ -36,11 +36,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentV
         holder.tvsemester.setText(studentsList.get(position).getSemester().toString());
         //Review the setchecked
         //holder.cbactive.setText(studentsList.get(position).getCheckBox().toString());
-        if(studentsList.get(position).getCheckBox().equals("yes")){
-            holder.cbactive.setChecked(true);
-        }else{
-            holder.cbactive.setChecked(false);
-        }
+        holder.checkBox.setChecked(studentsList.get(position).getCheckBox().equals("Yes"));
 
 
 
@@ -55,7 +51,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentV
     //Everything related to the cardview
     public static class studentViewHolder extends RecyclerView.ViewHolder {
         TextView tvid, tvname, tvsemester, tvmajor;
-        CheckBox cbactive;
+        CheckBox checkBox;
 
 
         public  studentViewHolder(@NonNull View itemView) {
@@ -64,8 +60,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentV
             tvname = itemView.findViewById(R.id.tvname);
             tvmajor = itemView.findViewById(R.id.tvmajor);
             tvsemester = itemView.findViewById(R.id.tvsemester);
-
-            cbactive = itemView.findViewById(R.id.cbactive);
+            checkBox = itemView.findViewById(R.id.checkBox);
         }
     }
 }
