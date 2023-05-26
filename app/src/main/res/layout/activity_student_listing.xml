@@ -36,7 +36,8 @@
             android:layout_height="60dp"
             android:text="Back"
             android:layout_gravity="center"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:onClick="Back"/>
 
     </LinearLayout>
 
