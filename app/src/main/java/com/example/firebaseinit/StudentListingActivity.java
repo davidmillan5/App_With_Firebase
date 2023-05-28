@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 
@@ -58,9 +57,10 @@ public class StudentListingActivity extends AppCompatActivity {
                                 objstudents.setFullName(document.getString("FullName"));
                                 objstudents.setMajor(document.getString("Major"));
                                 objstudents.setSemester(document.getString("Semester"));
+                                objstudents.setCheckBox(document.getString("CheckBox"));
                                 arrayListStudents.add(objstudents);
                             }
-                            StudentAdapter addstudent = new StudentAdapter(arrayListStudents);
+                            AdapterStudent addstudent = new AdapterStudent(arrayListStudents);
                             jrvstudent.setAdapter(addstudent);
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());

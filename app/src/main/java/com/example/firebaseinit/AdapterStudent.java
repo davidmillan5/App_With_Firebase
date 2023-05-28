@@ -11,31 +11,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHolder>{
+public class AdapterStudent extends RecyclerView.Adapter<AdapterStudent.studentViewHolder>{
 
     //ArrayList
 
     ArrayList<ClsStudent> studentsList;
 
-    public StudentAdapter(ArrayList<ClsStudent> studentsList) {
+    public AdapterStudent(ArrayList<ClsStudent> studentsList) {
         this.studentsList = studentsList;
     }
 
     @NonNull
     @Override
-    public StudentAdapter.studentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterStudent.studentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.studentresource,null,false);
-        return new StudentAdapter.studentViewHolder(view);
+        return new AdapterStudent.studentViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentAdapter.studentViewHolder holder, int position) {
-        holder.tvid.setText(studentsList.get(position).getId().toString());
-        holder.tvname.setText(studentsList.get(position).getFullName().toString());
-        holder.tvmajor.setText(studentsList.get(position).getMajor().toString());
-        holder.tvsemester.setText(studentsList.get(position).getSemester().toString());
+    public void onBindViewHolder(@NonNull AdapterStudent.studentViewHolder holder, int position) {
+        holder.tvid.setText(studentsList.get(position).getId());
+        holder.tvname.setText(studentsList.get(position).getFullName());
+        holder.tvmajor.setText(studentsList.get(position).getMajor());
+        holder.tvsemester.setText(studentsList.get(position).getSemester());
+        //System.out.println("debugger"+studentsList.get(position).getCheckBox().equals("Yes"));
         //Review the setchecked
-        //holder.checkBox.setSelected(studentsList.get(position).getCheckBox().isEmpty());
+        if(studentsList.get(position).getCheckBox().equals("Yes")){
+            holder.cbactive.setChecked(true);
+        }else{
+            holder.cbactive.setChecked(false);
+        }
+
 
 
 
@@ -53,7 +59,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentV
     //Everything related to the cardview
     public static class studentViewHolder extends RecyclerView.ViewHolder {
         TextView tvid, tvname, tvsemester, tvmajor;
-        CheckBox checkBox;
+        CheckBox cbactive;
 
 
         public studentViewHolder(@NonNull View itemView) {
@@ -62,7 +68,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentV
             tvname = itemView.findViewById(R.id.tvname);
             tvmajor = itemView.findViewById(R.id.tvmajor);
             tvsemester = itemView.findViewById(R.id.tvsemester);
-            checkBox = itemView.findViewById(R.id.resourcecheckBox);
+            cbactive = itemView.findViewById(R.id.cbactive);
         }
     }
 }
