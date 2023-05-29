@@ -309,4 +309,14 @@ public class EnrollmentActivity extends AppCompatActivity {
 
     //End Back Method
 
+
+    // Begin Consult Method
+
+    public void General_Consult(View view){
+        Intent generalIntent = new Intent(this, EnrollmentListingActivity.class);
+        startActivity(generalIntent);
+    }
+
+    //End Consult Method
+
 }
