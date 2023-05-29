@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -112,13 +113,13 @@ public class EnrollmentActivity extends AppCompatActivity {
         classCode = jetClassId.getText().toString();
 
 
-        if( studentCode.isEmpty() || classCode.isEmpty()){
+        if(  enrollmentCode.isEmpty() || studentCode.isEmpty() || classCode.isEmpty()){
             Toast.makeText(this, "All of the fields are required", Toast.LENGTH_SHORT).show();
             jetenrollmentCode.requestFocus();
         }else{
             // Create e a new user with a first and last name
             Map<String, Object> enrollment = new HashMap<>();
-            enrollment.put("enrollmentCode", UUID.randomUUID().toString());
+            enrollment.put("enrollmentCode", enrollmentCode);
             enrollment.put("ClassCode", classCode);
             enrollment.put("StudentCode", studentCode);
             enrollment.put("StudentFullname", jtvStudentFullName.getText().toString());
@@ -241,6 +242,71 @@ public class EnrollmentActivity extends AppCompatActivity {
     // End Method
 
 
+    // Anulate Method Starts Here
 
+    // Anulate Method
+
+    public void Anulate(View view){
+        if(!enrollmentCode.equals("")){
+            enrollmentCode = jetenrollmentCode.getText().toString();
+            studentCode = jetStudentId.getText().toString();
+            classCode = jetClassId.getText().toString();
+            studentFullName = jtvStudentFullName.getText().toString();
+            className = jtvClassName.getText().toString();
+
+            if (enrollmentCode.isEmpty() || studentCode.isEmpty() || classCode.isEmpty() || studentFullName.isEmpty() || className.isEmpty()) {
+                Toast.makeText(this, "All of the fields are required", Toast.LENGTH_SHORT).show();
+                jetenrollmentCode.requestFocus();
+            } else {
+                // Create e a new user with a first and last name
+                Map<String, Object> enrollment = new HashMap<>();
+                enrollment.put("enrollmentCode", enrollmentCode);
+                enrollment.put("ClassCode", classCode);
+                enrollment.put("StudentCode", studentCode);
+                enrollment.put("StudentFullname", jtvStudentFullName.getText().toString());
+                enrollment.put("ClassName",jtvClassName.getText().toString());
+                enrollment.put("EnrollmentCheckBox", "No");
+
+
+                db.collection("Enrollments").document(enrollmentCode)
+                        .set(enrollment)
+
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(EnrollmentActivity.this, "Student correctly updated.....", Toast.LENGTH_SHORT).show();
+                                Clear_fields();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EnrollmentActivity.this, "Student could not be updated....", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }else{
+            Toast.makeText(this, "First you got to search...", Toast.LENGTH_SHORT).show();
+            jetenrollmentCode.requestFocus();
+        }
+    }
+
+
+
+
+
+
+    // Anulate Mehod Ends Here
+
+
+    //Start Back method
+
+
+    public void Back(View view){
+        Intent intmain=new Intent(this,MainActivity.class);
+        startActivity(intmain);
+    }
+
+    //End Back Method
 
 }
